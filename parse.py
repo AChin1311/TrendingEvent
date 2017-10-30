@@ -21,7 +21,7 @@ tweets['text'] = map(lambda tweet: tweet['text'], tweets_data)
 tweets['lang'] = map(lambda tweet: tweet['lang'], tweets_data)
 tweets['country'] = map(lambda tweet: tweet['place']['country'] if tweet['place'] != None else None, tweets_data)
 
-
+#
 # tweets_by_lang = tweets['lang'].value_counts()
 
 # fig, ax = plt.subplots()
