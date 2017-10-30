@@ -15,7 +15,7 @@ for line in tweets_file:
         continue
 
 print(len(tweets_data))
-
+#test
 tweets = pd.DataFrame()
 tweets['text'] = map(lambda tweet: tweet['text'], tweets_data)
 tweets['lang'] = map(lambda tweet: tweet['lang'], tweets_data)
