@@ -10,7 +10,7 @@ class StdOutListener(StreamListener):
     def on_data(self, data):
         with open(sys.argv[1], 'a') as f:
           f.write(data)
-          print("write")
+          print('write')
         return True
 
     def on_error(self, status):
