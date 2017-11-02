@@ -14,7 +14,7 @@ class StdOutListener(StreamListener):
         with open(sys.argv[1], 'a') as f:
           tweet = json.loads(data)
           f.write(data)
-          print('write')
+          print('Press Ctrl + C to End Streaming…')
         return True
 
     def on_error(self, status):

@@ -2,6 +2,7 @@ import json
 import pandas as pd
 import matplotlib.pyplot as plt
 import sys
+import time
 
 tweets_data_path = sys.argv[1]
 
@@ -15,6 +16,7 @@ for line in tweets_file:
     except:
         continue
 
+print("Total Msg:")
 print(len(tweets_data))
 
 tweets = pd.DataFrame()
@@ -24,6 +26,7 @@ tweets['country'] = list(map(lambda tweet: tweet['place']['country'] if tweet['p
 tweets['created_at'] = list(map(lambda tweet: tweet['created_at'], tweets_data))
 
 for i in range(len(tweets_data)):
+    time.sleep(1)
     print(tweets['text'][i])
     if(tweets['country'][i]!=None):
         print(tweets['country'][i])
@@ -38,6 +41,6 @@ ax.tick_params(axis='y', labelsize=10)
 ax.set_xlabel('Country', fontsize=15)
 ax.set_ylabel('Number of tweets' , fontsize=15)
 ax.set_title('Top 5 Country', fontsize=15, fontweight='bold')
-tweets_by_country[:5].plot(ax=ax, kind='bar', color='red')
-plt.show()
+#tweets_by_country[:5].plot(ax=ax, kind='bar', color='red')
+#plt.show()
 
