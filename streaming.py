@@ -29,9 +29,6 @@ if __name__ == '__main__':
     stream = Stream(auth, l)
 
     #This line filter Twitter Streams to capture data by the keywords: 'python', 'javascript', 'ruby'
-    query_input = []
-    query_input += kw.disaster + kw.date 
-    print(query_input)
-    stream.filter(track = kw.month+kw.date, languages=['en'])
+    stream.filter(track = kw.date+kw.disaster, languages=['en'])
 
 
