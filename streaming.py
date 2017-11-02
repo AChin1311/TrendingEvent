@@ -21,7 +21,7 @@ class StdOutListener(StreamListener):
     def on_error(self, status):
         print(status)
 
-
+  +
 if __name__ == '__main__':
 
     #This handles Twitter authetification and the connection to Twitter Streaming API
@@ -31,6 +31,6 @@ if __name__ == '__main__':
     stream = Stream(auth, l)
 
     #This line filter Twitter Streams to capture data by the keywords: 'python', 'javascript', 'ruby'
-    stream.filter(track = kw.date, languages=['en'])
+    stream.filter(track = kw.date + kw.month, languages=['en'])
 
 
