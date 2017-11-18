@@ -20,10 +20,11 @@ print("Total Msg:")
 print(len(tweets_data))
 
 tweets = pd.DataFrame()
-tweets['text'] = list(map(lambda tweet: tweet['text'], tweets_data))
-tweets['lang'] = list(map(lambda tweet: tweet['lang'], tweets_data))
-tweets['country'] = list(map(lambda tweet: tweet['place']['country'] if tweet['place'] != None else None, tweets_data))
-tweets['created_at'] = list(map(lambda tweet: tweet['created_at'], tweets_data))
+tweets['text'] = list(map(lambda tweet: tweet.get('text'), tweets_data))
+tweets['lang'] = list(map(lambda tweet: tweet.get('lang'), tweets_data))
+tweets['created_at'] = list(map(lambda tweet: tweet.get('created_at'), tweets_data))
+tweets['country'] = list(map(lambda tweet: tweet['place'].get('country') if tweet.get('place') != None else None, tweets_data))
+
 
 for i in range(len(tweets_data)):
     time.sleep(1)
