@@ -1,5 +1,5 @@
 import json
-import pandas as pd\
+import pandas as pd
 import sys
 import time
 
@@ -20,39 +20,38 @@ print("Total Msg:")
 print(len(tweets_data))
 
 for tw in tweets_data:
-    disaster = False
-    data = False
-    month = False
-    entertainment = False
-    holiday = False
-    action = False
-    price = False
-    time = False
-    logistics = False
-    sport = False
-    location = False
+    disaster = 0
+    data = 0
+    month = 0
+    entertainment = 0
+    holiday = 0
+    action = 0
+    price = 0
+    time = 0
+    logistics = 0
+    sport = 0
+    location = 0
     for w in tw:
         if w in kw.disaster:
-            disaster = True
+            disaster += 1
         if w in kw.data:
-            data = True
+            data += 1
         if w in kw.month:
-            month = True
+            month += 1
         if w in kw.entertainment:
-            entertainment = True
+            entertainment += 1
         if w in kw.holiday:
-            holiday = True
+            holiday += 1
         if w in kw.action:
-            action = True
+            action += 1
         if w in kw.price:
-            price = True
+            price += 1
         if w in kw.time:
-            time = True
+            time += 1
         if w in kw.logistics:
-            logistics = True
+            logistics += 1
         if w in kw.sport:
-            sport = True
+            sport += 1
         if w in kw.location:
-            location = True
+            location += 1
 
-    
