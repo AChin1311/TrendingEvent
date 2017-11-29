@@ -15,7 +15,7 @@ for line in tweets_file:
         tweets_text.append(tweet['text'].lower())
         tweets_data.append(tweet)
         
-        print(tweet['text'])
+        #print(tweet['text'])
     except:
         continue
 
@@ -25,20 +25,35 @@ print(len(tweets_data))
 
 vectors = []
 for tw in tweets_text:
-    li = ['disaster','date','month','entertainment','holiday','action','price','time','logistics','sport','location']
-    features ={}
-    for l in li:
-        features[l] = 0
+    li_type = ['disaster','entertainment','holiday','sport']
+    li_details = ['date','month','action','price','time','logistics','location']
+    features_type ={}
+    features_details ={}
+    for l in li_type:
+        features_type[l] = 0
+    for l in li_details:
+        features_details[l] = 0
 
     for w in tw.split():
-        for l in li:
+        for l in li_type:
             if w in kw_features[l]:
-                features[l] += 1
+                features_type[l] += 1
+        for l in li_details:
+            if w in kw_features[l]:
+                features_details[l] += 1
 
-    tmp = []
-    for l in features:
-        tmp.append(features[l])
-    if sum(tmp) == 0:
+    tmp_type = []
+    tmp_deatails = []
+    for l in features_type:
+        tmp_type.append(features_type[l])
+    for l in features_details:
+        tmp_deatails.append(features_details[l])
+    if sum(tmp_type) == 0 or sum(tmp_deatails) == 0:
         continue
-    vectors.append(tmp)
-print(vectors)
+    vectors.append(tmp_type + tmp_deatails)
+    print(tmp_type + tmp_deatails)
+    print(tw)
+
+
+#print(vectors)
+
