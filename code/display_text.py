@@ -52,9 +52,8 @@ if __name__ == '__main__':
                 vectors.append(tmp_type + tmp_deatails)
                 print(tmp_type + tmp_deatails)
                 f.write(compress(tw_d))
-                    
-            
-        
+                total_msg += 1
+
             except:
                 continue
 
