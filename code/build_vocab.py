@@ -2,11 +2,12 @@ import json
 from nltk.corpus import stopwords
 import re
 import operator
+from stoplist import stop_ls 
 
 if __name__ == '__main__':
 
     tweets_data_paths = ["1103_compress.json", "1104_compress.json", "1105_compress.json", "1107_compress.json"]
-    #tweets_data_paths = ["1103_compress.json"]
+    stopset = set(stop_ls)
     stopWords = set(stopwords.words('english'))
     for path in tweets_data_paths:
         tweets_file = open('../data/'+path, "r")
@@ -21,6 +22,8 @@ if __name__ == '__main__':
                 for w in tw.split():
                     w = w.strip('…,.;:?!\r\b\t\'\",()[]{}|-=+*_ \n')
                     if w in stopWords:
+                        continue
+                    if w in stopset:
                         continue
                     if w not in dic:
                         dic[w] = 0
