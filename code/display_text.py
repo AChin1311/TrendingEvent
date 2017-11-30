@@ -12,8 +12,6 @@ if __name__ == '__main__':
 
     tweets_data_path = sys.argv[1]
 
-    tweets_data = []
-    tweets_text = []
     tweets_file = open(tweets_data_path, "r")
     total_msg = 0
     vectors = []
