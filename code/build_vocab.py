@@ -32,7 +32,7 @@ if __name__ == '__main__':
     len_dic = 0
     with open("dictionary", 'w') as f:
         for w in sort_dic:
-            if w[1] <= 1 or w[1] == '':
+            if w[1] <= 1 or w[0] == '' or w[0] == 'rt':
                 continue
             len_dic += 1
             f.write(w[0]+' '+str(w[1])+'\n')
