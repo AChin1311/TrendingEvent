@@ -3,9 +3,11 @@ from nltk.corpus import stopwords
 import re
 import operator
 from stoplist import stop_ls 
+from nltk.stem import PorterStemmer
 
 if __name__ == '__main__':
 
+    ps = PorterStemmer()
     tweets_data_paths = ["1103_compress.json", "1104_compress.json", "1105_compress.json", "1107_compress.json"]
     stopset = set(stop_ls)
     stopWords = set(stopwords.words('english'))
@@ -20,7 +22,8 @@ if __name__ == '__main__':
                 tw_d = tweet
                 tw = tweet['text'].lower()
                 for w in tw.split():
-                    w = w.strip('…,.;:?!\r\b\t\'\",()[]{}|-=+*_ \n')
+                    w = w.strip('’…,.;:?!\r\b\t\'\",()[]{}|-=+*_ \n')
+                    w = ps.stem(w)
                     if w in stopWords:
                         continue
                     if w in stopset:
@@ -35,7 +38,7 @@ if __name__ == '__main__':
     len_dic = 0
     with open("dictionary", 'w') as f:
         for w in sort_dic:
-            if w[1] <= 1 or w[0] == '' or w[0] == 'rt':
+            if w[1] <= 5 or w[0] == '' or w[0] == 'rt':
                 continue
             len_dic += 1
             f.write(w[0]+' '+str(w[1])+'\n')
