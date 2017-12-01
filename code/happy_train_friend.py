@@ -8,7 +8,7 @@ from nltk.corpus import stopwords
 if __name__ == '__main__':
     stopWords = set(stopwords.words('english'))
     
-    with open('dictionary', 'r',encoding='utf-8', errors='ignore') as f:
+    with open('data/dictionary', 'r',encoding='utf-8', errors='ignore') as f:
         content = f.readlines()
     f.close()
     wordlist = []
@@ -23,6 +23,7 @@ if __name__ == '__main__':
     "1115_compress.json","1116_compress.json","1117_compress.json","1118_compress.json",\
     "1119_compress.json","1120_compress.json","1121_compress.json","1127_compress.json",\
     "1128_compress.json"]
+
     docs = []
     for path in tweets_data_paths:
         print(path)
