@@ -43,3 +43,4 @@ if __name__ == '__main__':
     print(arr)
     np.save("./doc_vec", arr)
         
+        
