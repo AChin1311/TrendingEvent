@@ -18,7 +18,7 @@ if __name__ == '__main__':
     stopWords = set(stopwords.words('english'))
     dic = {}
     for path in tweets_data_paths:
-        tweets_file = open('../data/'+path, "r")
+        tweets_file = open('data/'+path, "r")
         total_msg = 0
         for line in tweets_file:
             try:
