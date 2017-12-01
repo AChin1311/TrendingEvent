@@ -47,6 +47,6 @@ if __name__ == '__main__':
                     continue
     arr = np.array(docs)
     print(arr)
-    np.save("./doc_vec", arr)
+    np.save("data/doc_vec", arr)
         
         

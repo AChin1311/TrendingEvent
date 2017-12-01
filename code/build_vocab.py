@@ -37,12 +37,11 @@ if __name__ == '__main__':
                     if w not in dic:
                         dic[w] = 0
                     dic[w] += 1
-
             except:
                 continue
     sort_dic = sorted(dic.items(),key=operator.itemgetter(1))[::-1]
     len_dic = 0
-    with open("dictionary", 'w') as f:
+    with open("data/dictionary", 'w') as f:
         for w in sort_dic:
             if w[1] <= 100 or w[0] == '' or w[0] == 'rt':
                 continue
