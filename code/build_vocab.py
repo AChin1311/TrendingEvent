@@ -20,7 +20,7 @@ if __name__ == '__main__':
     dic = {}
     for path in tweets_data_paths:
         print("processing ", path)
-        tweets_file = open('data/'+path, "r")
+        tweets_file = open('data/'+path, "r",encoding='utf-8', errors='ignore')
         total_msg = 0
         for line in tweets_file:
             try:
