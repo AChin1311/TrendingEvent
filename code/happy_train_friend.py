@@ -8,7 +8,7 @@ from nltk.corpus import stopwords
 if __name__ == '__main__':
     stopWords = set(stopwords.words('english'))
     
-    with open('dictionary', 'r',encoding='utf-8', errors='ignore') as f:
+    with open('data/dictionary', 'r',encoding='utf-8', errors='ignore') as f:
         content = f.readlines()
     f.close()
     wordlist = []
