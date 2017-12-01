@@ -16,8 +16,8 @@ if __name__ == '__main__':
         w, _ = l.split()
         wordlist.append(w)
     print(wordlist)
-    #tweets_data_paths = ["1103_compress.json", "1104_compress.json", "1105_compress.json", "1107_compress.json"]
-    tweets_data_paths = ["1103_compress.json"]
+    tweets_data_paths = ["1103_compress.json", "1104_compress.json", "1105_compress.json", "1107_compress.json"]
+    #tweets_data_paths = ["1103_compress.json"]
     
     docs = []
     with open('doc_vec', 'w') as f:
@@ -31,7 +31,7 @@ if __name__ == '__main__':
                     tw = tweet['text'].lower()
                     doc_vec = [0]*len(wordlist)
                     doc = tw.split()
-                    print(doc)
+                    #print(doc)
                     for w in doc:
                         w = w.strip('…,.;:?!\r\b\t\'\",()[]{}|-=+*_ \n')
                         if w in stopWords:
@@ -40,8 +40,9 @@ if __name__ == '__main__':
                             doc_vec[wordlist.index(w)] = 1
                     #print(doc_vec)
                     #docs.append(doc_vec)                        
-                    print(sum(doc_vec))
+                    print(doc_vec)
                     f.write(','.join(doc_vec)+'\n')
                 except:
                         continue
+    f.close()
             
