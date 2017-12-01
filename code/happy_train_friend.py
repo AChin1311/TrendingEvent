@@ -16,13 +16,13 @@ if __name__ == '__main__':
         w, _ = l.split()
         wordlist.append(w)
 
-    tweets_data_paths = ["1103_compress.json", "1104_compress.json", "1105_compress.json", "1107_compress.json"]
-    # tweets_data_paths = ["1103_compress.json","1104_compress.json","1105_compress.json",\
-    # "1106_compress.json","1107_compress.json","1108_compress.json","1109_compress.json",\
-    # "1110_compress.json","1112_compress.json","1113_compress.json","1114_compress.json",\
-    # "1115_compress.json","1116_compress.json","1117_compress.json","1118_compress.json",\
-    # "1119_compress.json","1120_compress.json","1121_compress.json","1127_compress.json",\
-    # "1128_compress.json"]
+    #tweets_data_paths = ["1103_compress.json", "1104_compress.json", "1105_compress.json", "1107_compress.json"]
+    tweets_data_paths = ["1103_compress.json","1104_compress.json","1105_compress.json",\
+    "1106_compress.json","1107_compress.json","1108_compress.json","1109_compress.json",\
+    "1110_compress.json","1112_compress.json","1113_compress.json","1114_compress.json",\
+    "1115_compress.json","1116_compress.json","1117_compress.json","1118_compress.json",\
+    "1119_compress.json","1120_compress.json","1121_compress.json","1127_compress.json",\
+    "1128_compress.json"]
     docs = []
     for path in tweets_data_paths:
         print(path)
