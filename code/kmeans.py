@@ -21,7 +21,6 @@ label = []
 for path in tweets_data_paths:
   print("processing ", path)
 
-<<<<<<< HEAD
   tweets_file = open('data/'+path, 'r',encoding='utf-8', errors='ignore')
   for line in tweets_file:
     try:
