@@ -69,7 +69,9 @@ if __name__ == '__main__':
   print(model.wv.vocab)
   #training of model
   print("train")
+
   model.train(it, total_examples=model.corpus_count, epochs=100, start_alpha=0.025)
-  print(len(model.docvecs))
-  model.save('doc2vec.model')
+ 
+  model.save('data/doc2vec.model')
+
   print('model saved')
