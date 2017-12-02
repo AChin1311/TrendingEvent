@@ -8,6 +8,7 @@ from nltk.stem import PorterStemmer
 if __name__ == '__main__':
 
     ps = PorterStemmer()
+
     tweets_data_paths = ["1103_compress.json","1104_compress.json"] 
     # tweets_data_paths = [ "1103_compress.json","1104_compress.json","1105_compress.json",\
     # "1106_compress.json","1107_compress.json","1108_compress.json","1109_compress.json",\
@@ -19,8 +20,7 @@ if __name__ == '__main__':
     stopWords = set(stopwords.words('english'))
     dic = {}
     for path in tweets_data_paths:
-        print("processing ", path)
-        tweets_file = open('data/'+path, "r",encoding='utf-8', errors='ignore')
+        tweets_file = open('data/'+path, "r")
         total_msg = 0
         for line in tweets_file:
             try:
