@@ -30,7 +30,7 @@ def reassignClusters(dataSet, centroids, clusters):
 
 K = 5
 if __name__ == '__main__':
-  dataSet = np.load('data/doc_vec.npy').tolist()
+  dataSet = np.load('data/doc_vec_1103_compress.npy').tolist()
   print(len(dataSet))
   print(len(dataSet[0]))
   dim = len(dataSet[0])
