@@ -3,7 +3,7 @@ from sklearn.cluster import KMeans
 import json
 from kw import features as kw_features
 
-model = gensim.models.doc2vec.Doc2Vec.load('doc2vec.model')
+model = gensim.models.doc2vec.Doc2Vec.load('data/doc2vec.model')
 #start testing
 #printing the vector of document at index 1 in docLabels
 tweets_data_paths = ["1105_compress.json","1104_compress.json"] 
@@ -21,7 +21,6 @@ label = []
 for path in tweets_data_paths:
   print("processing ", path)
 
-<<<<<<< HEAD
   tweets_file = open('data/'+path, 'r',encoding='utf-8', errors='ignore')
   for line in tweets_file:
     try:
