@@ -18,7 +18,7 @@ class LabeledLineSentence(object):
 
 if __name__ == '__main__':
   #now create a list that contains the name of all the text file in your data #folder
-  tweets_data_paths = ["1104_compress.json","1105_compress.json"] 
+  tweets_data_paths = ["1105_compress.json","1104_compress.json"] 
   # tweets_data_paths = [ "1103_compress.json","1104_compress.json","1105_compress.json",\
   # "1106_compress.json","1107_compress.json","1108_compress.json","1109_compress.json",\
   # "1110_compress.json","1112_compress.json","1113_compress.json","1114_compress.json",\
@@ -41,7 +41,7 @@ if __name__ == '__main__':
         tw = tweet['text'].lower()
         s = []
         for w in tw.split():
-            w = w.strip('’…,.;:?!\r\b\t\'\",()[]{}|-=+*_ \n')
+            w = w.strip('’…,….;:?!\r\b\t\'\",()[]{}|-=+*_ \n')
             w = ps.stem(w)
             if w in stopWords:
                 continue
@@ -80,11 +80,11 @@ if __name__ == '__main__':
   print(len(data))
   model = gensim.models.Doc2Vec(size=100, min_count=0, alpha=0.02, min_alpha=0.02)
   model.build_vocab(it)
-  #print(model.wv.vocab)
+  print(model.wv.vocab)
   #training of model
   print("train")
 
-  model.train(it, total_examples=model.corpus_count, epochs=200, start_alpha=0.025)
+  model.train(it, total_examples=model.corpus_count, epochs=100, start_alpha=0.025)
  
   model.save('data/doc2vec.model')
 

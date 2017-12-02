@@ -49,6 +49,7 @@ print(len(data))
 kmeans = KMeans(n_clusters=4)
 kmeans.fit(X)
 y_kmeans = kmeans.predict(X)
+
 _out = []
 _in = []
 for i,y in enumerate(y_kmeans):
