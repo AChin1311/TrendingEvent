@@ -2,6 +2,8 @@ import gensim
 from sklearn.cluster import KMeans
 import json
 from kw import features as kw_features
+from sklearn.metrics.cluster import normalized_mutual_info_score
+from sklearn.metrics import accuracy_score
 
 model = gensim.models.doc2vec.Doc2Vec.load('data/doc2vec.model')
 #start testing
@@ -47,5 +49,15 @@ print(len(data))
 kmeans = KMeans(n_clusters=4)
 kmeans.fit(X)
 y_kmeans = kmeans.predict(X)
+_out = []
+_in = []
 for i,y in enumerate(y_kmeans):
-  print(label[i], y, data[i])
+    _in.append(y)
+    for j in range(len(label[i])):
+        if label[i][j] !=0:
+            _out.append(j)
+            break
+    print(j, y, data[i])
+
+print(accuracy_score(_in,_out))
+print(normalized_mutual_info_score(_in, _out))

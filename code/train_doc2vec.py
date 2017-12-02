@@ -66,7 +66,7 @@ if __name__ == '__main__':
   print(len(data))
   model = gensim.models.Doc2Vec(size=300, min_count=0, alpha=0.025, min_alpha=0.025)
   model.build_vocab(it)
-  print(model.wv.vocab)
+  #print(model.wv.vocab)
   #training of model
   print("train")
 
