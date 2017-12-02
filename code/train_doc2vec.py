@@ -14,9 +14,8 @@ class LabeledLineSentence(object):
       yield gensim.models.doc2vec.LabeledSentence(doc, [self.labels_list[idx]])
 
 if __name__ == '__main__':
-
   #now create a list that contains the name of all the text file in your data #folder
-  tweets_data_paths = ["1103_compress.json","1104_compress.json"] 
+  tweets_data_paths = ["1105_compress.json","1104_compress.json"] 
   # tweets_data_paths = [ "1103_compress.json","1104_compress.json","1105_compress.json",\
   # "1106_compress.json","1107_compress.json","1108_compress.json","1109_compress.json",\
   # "1110_compress.json","1112_compress.json","1113_compress.json","1114_compress.json",\
@@ -27,37 +26,45 @@ if __name__ == '__main__':
   data = []
   for path in tweets_data_paths:
     print("processing ", path)
-    
+
     tweets_file = open('data/'+path, 'r',encoding='utf-8', errors='ignore')
     for line in tweets_file:
       try:
         tweet = json.loads(line)
         tw = tweet['text'].lower()
         data.append(tw)
-        docLabels.append(path)      
+        docLabels.append(tweet['id_str'])      
       except:
         continue
-  # tokenizer = RegexpTokenizer(' ')
-  # stopword_set = set(stopwords.words('english'))
+
+  tokenizer = RegexpTokenizer(' ')
+  stopword_set = set(stopwords.words('english'))
   
-  # def nlp_clean(data):
-  #   new_data = []
-  #   for d in data:
-  #     new_str = d.lower()
-  #     dlist = tokenizer.tokenize(new_str)
-  #     dlist = list(set(dlist).difference(stopword_set))
-  #     new_data.append(dlist)
-  #   return new_data
+  def nlp_clean(data):
+    new_data = []
+    for d in data:
+      new_str = d.lower()
+      dlist = tokenizer.tokenize(new_str)
+      dlist = list(set(dlist).difference(stopword_set))
+      new_data.append(dlist)
+    return new_data
   
-  # data = nlp_clean(data)
+  data = nlp_clean(data)
+
   it = LabeledLineSentence(data, docLabels)
   print(len(data))
   model = gensim.models.Doc2Vec(size=300, min_count=0, alpha=0.025, min_alpha=0.025)
   model.build_vocab(it)
-  print(model.wv.vocab)
+  print(len(model.wv.vocab))
   #training of model
   print("train")
+<<<<<<< HEAD
   model.train(it, total_examples=model.corpus_count, epochs=100, total_words=None, start_alpha=0.025)
   
   model.save('data/doc2vec.model')
+=======
+  model.train(it, total_examples=model.corpus_count, epochs=30, start_alpha=0.025)
+  print(len(model.docvecs))
+  model.save('doc2vec.model')
+>>>>>>> b4c2f5544e69d42859c6f2a462759a0fb100bc78
   print('model saved')
