@@ -5,6 +5,9 @@ from os import listdir
 from os.path import isfile, join
 import json
 from kw import features as kw_features
+from stoplist import stop_ls
+from nltk.stem import PorterStemmer
+
 class LabeledLineSentence(object):
   def __init__(self, doc_list, labels_list):
     self.labels_list = labels_list
@@ -22,9 +25,12 @@ if __name__ == '__main__':
   # "1115_compress.json","1116_compress.json","1117_compress.json","1118_compress.json",\
   # "1119_compress.json","1120_compress.json","1121_compress.json","1127_compress.json",\
   # "1128_compress.json"]
+  ps = PorterStemmer()
   docLabels = []
   data = []
   disaster = 0
+  stopset = set(stop_ls)
+  stopWords = set(stopwords.words('english'))
   for path in tweets_data_paths:
     print("processing ", path)
 
@@ -33,9 +39,17 @@ if __name__ == '__main__':
       try:
         tweet = json.loads(line)
         tw = tweet['text'].lower()
+        s = []
+        for w in tw.split():
+            w = w.strip('’…,.;:?!\r\b\t\'\",()[]{}|-=+*_ \n')
+            w = ps.stem(w)
+            if w in stopWords:
+                continue
+            if w in stopset:
+                continue
+            s.append(w)
         
         flag = False
-        s = tw.split()
         for w in s:
           if w in kw_features['disaster']:
             disaster += 1
@@ -64,13 +78,13 @@ if __name__ == '__main__':
 
   it = LabeledLineSentence(data, docLabels)
   print(len(data))
-  model = gensim.models.Doc2Vec(size=300, min_count=0, alpha=0.025, min_alpha=0.025)
+  model = gensim.models.Doc2Vec(size=100, min_count=0, alpha=0.02, min_alpha=0.02)
   model.build_vocab(it)
   #print(model.wv.vocab)
   #training of model
   print("train")
 
-  model.train(it, total_examples=model.corpus_count, epochs=100, start_alpha=0.025)
+  model.train(it, total_examples=model.corpus_count, epochs=200, start_alpha=0.025)
  
   model.save('data/doc2vec.model')
 
