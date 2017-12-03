@@ -37,9 +37,13 @@ if __name__ == '__main__':
         sort_dic = sorted(dic.items(),key=operator.itemgetter(1))[::-1]
         len_dic = 0
         with open("data/"+path+"_dictionary", 'w') as f:
+            count = 0
             for w in sort_dic:
                 if w[1] <= 100 or w[0] == '' or w[0] == 'rt':
                     continue
                 len_dic += 1
                 f.write(w[0]+' '+str(w[1])+'\n')
+                count += 1
+                if count >= 500:
+                    break
         print(len_dic)
