@@ -1,6 +1,7 @@
 import json
 from kw import features as kw_features
 import numpy
+import operator
 
 if __name__ == '__main__':
 
@@ -29,8 +30,9 @@ if __name__ == '__main__':
     if date_in_text not in event_cluster:
       event_cluster[date_in_text] = []
     event_cluster[date_in_text].append(tweet)
-
-  for e in event_cluster:
+  
+    
+  for e in sorted(event_cluster, key=lambda k: len(event_cluster[k]), reverse=True)[1:]:
     print('=========================', e, '=========================')
     for tw in event_cluster[e]:
       print(tw)
