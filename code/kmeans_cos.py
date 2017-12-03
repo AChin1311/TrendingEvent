@@ -2,14 +2,9 @@ import numpy as np
 from sklearn.cluster import KMeans
 import collections
 
-# compare = lambda x, y: collections.Counter(x) == collections.Counter(y)
+compare = lambda x, y: collections.Counter(x) == collections.Counter(y)
 dim = 0
 
-def compare(c1, c2):
-  for i in range(len(c1)):
-    if c1[i]!=c2[i]:
-      return False
-  return True
 
 def getCentroid(cluster):
   total = [0.0]*dim
