@@ -34,6 +34,7 @@ if __name__ == '__main__':
   stopset = set(stop_ls)
   stopWords = set(stopwords.words('english'))
   n = 0
+  month = ["January", "February", "March", "April", "May", "June", "July", "August", "September", "October", "November", "December"]
   for path in tweets_data_paths:
     print("processing ", path)
 
@@ -48,9 +49,12 @@ if __name__ == '__main__':
             w = w.strip('’…,….;:?!\r\b\t\'\",()[]{}|-=+*_ \n')
             w = ps.stem(w)
             if w in stopWords:
-                continue
+              continue
             if w in stopset:
-                continue
+              continue
+            if w in kw_features['date']:
+              w = w.split('/')[0]
+              w = month[int(w)-1]
             s.append(w)
         
         flag = False
@@ -59,7 +63,7 @@ if __name__ == '__main__':
             disaster += 1
             flag = True
             break
-        if flag and disaster%80 != 0:
+        if flag and disaster%5 != 0:
           continue
         data.append(tw.split())
         docLabels.append(tweet['id_str'])      
@@ -67,8 +71,6 @@ if __name__ == '__main__':
         continue
     
 
-  tokenizer = RegexpTokenizer(' ')
-  stopword_set = set(stopwords.words('english'))
   
   # def nlp_clean(data):
   #   new_data = []
@@ -83,7 +85,7 @@ if __name__ == '__main__':
 
   it = LabeledLineSentence(data, docLabels)
   print(len(data))
-  model = gensim.models.Doc2Vec(size=100, min_count=0, alpha=0.02, min_alpha=0.02)
+  model = gensim.models.Doc2Vec(size=100, min_count=0, alpha=0.025, min_alpha=0.025)
   model.build_vocab(it)
   #print(model.wv.vocab)
   #training of model
