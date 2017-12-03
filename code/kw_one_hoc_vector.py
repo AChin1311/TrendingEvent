@@ -7,17 +7,17 @@ from sklearn.metrics import accuracy_score
 import operator
 from nltk.stem import PorterStemmer
 import kmeanscosine as kmean_cos
-tweets_data_paths = ["holiday"] 
 
-data = []
-X = []
-label = []
-data_dict = {}
-ps = PorterStemmer()
-holiday_dict = {}
-holiday_features = []
-holiday_freq = []
+tweets_data_paths = ["sport","holiday","entertainment","disaster"] 
+
+
 for path in tweets_data_paths:
+  data = []
+  X = []
+  label = []
+  holiday_dict = {}
+  holiday_features = []
+  holiday_freq = []
   print("processing ", path," dictionary")
   dictionary_file = open('data/'+path+'_dictionary', 'r',encoding='utf-8', errors='ignore')
   i = 0
@@ -30,12 +30,9 @@ for path in tweets_data_paths:
       i += 1
     except:
       continue
-# print(holiday_features)
-# print(holiday_dict)
 
-m = 0
-for path in tweets_data_paths:
-  print("processing ", path)
+  m = 0
+  print("building ", path," vector")
   tweets_file = open('data/'+path+'.txt', 'r',encoding='utf-8', errors='ignore')
   for line in tweets_file:
     try:
@@ -50,20 +47,25 @@ for path in tweets_data_paths:
     except:
       continue    
 
-# kmeans = KMeans(n_clusters=2)
-# kmeans.fit(X)
-# y_kmeans = kmeans.predict(X)
-# print(len(X), len(X[0]))
-n_clus = 50
-y_kmeans = kmean_cos.create_cluster(X, nclust = n_clus)
+  # n_clus = int(m/200)
+  n_clus = 50
+  print("clustering ", path," kmeans  with ",n_clus," clusters")
+  y_kmeans = kmean_cos.create_cluster(X, nclust = n_clus)
 
-n = 0
-y_list = [0]*n_clus
-for i,y in enumerate(y_kmeans):
-  n += 1
-  print(y, data[i])
-  y_list[y] += 1
-  # print(X[i])
-print(n)
-print(y_list)
+  n = 0
+  y_list = [0]*n_clus
+  print("writing ", path, " result to file")
+  with open("kmeans_result/"+path+"_result", 'w') as f:
+    for i,y in enumerate(y_kmeans):
+      n += 1
+      f.write(str(y))
+      f.write(data[i])
+      y_list[y] += 1
+      # print(X[i])
+    f.write("tweets = "+str(n)+'\n')
+    f.write("total clusters = "+str(len(y_list))+'\n')
+    f.write("clusters = "+str(y_list)+'\n')
+    print("tweets =",n)
+    print("total clusters =",len(y_list))
+    print("clusters =",y_list)
 

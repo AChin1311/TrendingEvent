@@ -8,7 +8,7 @@ if __name__ == '__main__':
 
     ps = PorterStemmer()
 
-    tweets_data_paths = ["sport","holiday"] 
+    tweets_data_paths = ["sport","holiday","entertainment","disaster"] 
 
     stopset = set(stop_ls)
     stopWords = set(stopwords.words('english'))

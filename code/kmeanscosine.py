@@ -13,7 +13,5 @@ def create_cluster(sparse_data, nclust = 10):
     
     kmeans = k_means_.KMeans(n_clusters = nclust)
     kmeans.euclidean_distances = euc_dist
-    print("4")
     _ = kmeans.fit(sparse_data)
-    print("5")
     return kmeans.labels_
