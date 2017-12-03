@@ -21,10 +21,11 @@ if __name__ == '__main__':
                 line_list = line.split(',')       
                 text_data = []
                 for w in line_list[3].split():
-                    w = ps.stem(w)
                     if w in stopWords:
                         continue
                     if w in stopset:
+                        continue
+                    if len(w) == 1:
                         continue
                     if w not in dic:
                         dic[w] = 0
