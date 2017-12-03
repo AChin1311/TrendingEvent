@@ -24,11 +24,18 @@ for path in tweets_data_paths:
   print("processing ", path)
 
   tweets_file = open('data/'+path, 'r',encoding='utf-8', errors='ignore')
+  id = '000'
   for line in tweets_file:
     try:
       tweet = json.loads(line)
+      if(id == tweet['id_str']):
+        print(id)
+        continue
       id = tweet['id_str']
       print(id)
+      # print(len(model.docvecs[id]))
+      # a = model.docvecs[id]
+      # print(a)
       X.append(model.docvecs[id])
 
       tw = tweet['text'].lower()
