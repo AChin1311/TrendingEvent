@@ -11,8 +11,13 @@ def create_cluster(sparse_data, nclust = 10):
         return cosine_similarity(X, Y)
     k_means_.euclidean_distances = euc_dist
     
+    print("1")
     scaler = StandardScaler(with_mean=False)
+    print("2")
     sparse_data = scaler.fit_transform(sparse_data)
-    kmeans = k_means_.KMeans(n_clusters = nclust, n_jobs = 20, random_state = 3425)
+    print("3")
+    kmeans = k_means_.KMeans(n_clusters = nclust)
+    print("4")
     _ = kmeans.fit(sparse_data)
+    print("5")
     return kmeans.labels_

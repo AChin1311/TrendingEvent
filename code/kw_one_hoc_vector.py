@@ -6,6 +6,7 @@ from sklearn.metrics.cluster import normalized_mutual_info_score
 from sklearn.metrics import accuracy_score
 import operator
 from nltk.stem import PorterStemmer
+import kmeanscosine as kmean_cos
 
 tweets_data_paths = ["holiday.txt"] 
 
@@ -33,12 +34,13 @@ for path in tweets_data_paths:
           one_hoc_vec[holiday_dict[w]] += 1
       X.append(one_hoc_vec)
       m+=1
+      print(one_hoc_vec)
     except:
       continue    
-
-kmeans = KMeans(n_clusters=2)
-kmeans.fit(X)
-y_kmeans = kmeans.predict(X)
+print(len(X), len(X[0]))
+y_kmeans = kmean_cos.create_cluster(X, nclust = 5)
+# kmeans.fit(X)
+# y_kmeans = kmeans.predict(X)
 
 my_dict = {}
 n = 0
