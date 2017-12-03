@@ -4,7 +4,7 @@ import numpy
 
 if __name__ == '__main__':
 
-  tweets_data_paths = ["1103_compress.json","1104_compress.json"] 
+  tweets_data_paths = ["1103_compress.json","1104_compress.json","1105_compress.json","1107_compress.json"] 
   # tweets_data_paths = [ "1103_compress.json","1104_compress.json","1105_compress.json",\
   # "1106_compress.json","1107_compress.json","1108_compress.json","1109_compress.json",\
   # "1110_compress.json","1112_compress.json","1113_compress.json","1114_compress.json",\
