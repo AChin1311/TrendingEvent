@@ -25,3 +25,5 @@ for ac in acc:
 
   histo[indx] += 1
 print(histo)
+
+print(len(dic))
