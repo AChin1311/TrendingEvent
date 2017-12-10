@@ -4,6 +4,8 @@ import json
 from kw import features as kw_features
 from sklearn.metrics.cluster import normalized_mutual_info_score
 from sklearn.metrics import accuracy_score
+from sklearn.cluster import DBSCAN
+from sklearn import metrics
 import operator
 from nltk.stem import PorterStemmer
 import kmeanscosine as kmean_cos
@@ -52,26 +54,41 @@ for path in tweets_data_paths:
     except:
       continue    
 
-  # n_clus = int(m/200)
-  n_clus = 400
-  print("clustering ", path," kmeans  with ",n_clus," clusters")
-  y_kmeans = kmean_cos.create_cluster(X, nclust = n_clus)
-
-  n = 0
-  y_list = [0]*n_clus
-  print("writing ", path, " result to file")
-  with open("kmeans_result/"+path+"_result", 'w') as f:
-    for i,y in enumerate(y_kmeans):
-      n += 1
-      f.write(str(y))
-      f.write(", ")
+  db = DBSCAN(eps=100, min_samples=10).fit(X)
+  labels = db.labels_
+  with open("kmeans_result/dbscan_"+path+"_result", 'w') as f:
+    for i in range(len(labels)):
+      f.write(str(labels[i]) + ", ")
       f.write(tweets_data[i])
-      y_list[y] += 1
-      # print(X[i])
-    f.write("tweets = "+str(n)+'\n')
-    f.write("total clusters = "+str(len(y_list))+'\n')
-    f.write("clusters = "+str(y_list)+'\n')
-    print("tweets =",n)
-    print("total clusters =",len(y_list))
-    print("clusters =",y_list)
 
+  db_data = open("kmeans_result/dbscan_"+path+"_result", 'r',encoding='utf-8', errors='ignore')
+  db_dict = {}
+  for line in db_data:
+    try:
+      line_list = line.split(',')    
+      if line_list[0] == -1:
+        continue
+      if line_list[0] not in db_dict:
+        db_list = []
+        db_list.append(line_list[4])
+        db_dict[line_list[0]] = db_list
+      else:
+        db_dict[line_list[0]].append(line_list[4])
+    except: 
+      continue
+
+  db_dict_index = sorted(db_dict, key=lambda x: len(db_dict[x]), reverse=True) 
+
+  with open("kmeans_result/dbscan_"+path+"_ranking_result", 'w') as f:
+    for i in range(len(db_dict_index)):
+      index = db_dict_index[i]
+      f.write(str(index) + ", ")
+      f.write(str(len(db_dict[index])) + ", ")
+      f.write(db_dict[index][0])
+
+  # with open("kmeans_result/"+"ranking_result", 'w') as f:
+  #     for i in range(20):
+  #         f.write(str(i+1)+ ". "+str(vals[sort_index[len(vals)-i-1]]) + ", ")
+  #         text = tweet[str(sort_index[len(vals)-i-1])].split(',')
+  #         f.write(tweet[str(sort_index[len(vals)-i-1])])
+  #         f.write("\n")
