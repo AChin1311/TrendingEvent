@@ -1,3 +1,23 @@
+in run.sh we sequentially execute these following codes:
+python3 classify.py
+    -classify the compressed json file from display_text.py into 4 different categories
+    -the 4 categories are sport/entertainment/disasters/holiday
+    -since the data are to large, we only select "sport" for simplification
+python3 txt2dic.py
+    -build dictionary file by reading the output from classify.py
+python3 kw_one_hoc_vector.py
+    -build vector of each tweet by using output from classify.py and txt2dic.py
+python3 cal_results.py
+    -use kmeans clustering with cosine distance
+python3 ranking.py
+    -rank top tweets from kmeans
+python3 DBscan.py
+    -use dbscan clustering and rank the output
+
+
+
+The folloing are all the codes we wrote:
+
 streaming.py - streamiing data from twitter using "date" and "disaster" in kw.py
 parse.py- try to split json 
 table.py - table for id_str, user screen name
