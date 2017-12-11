@@ -3,7 +3,7 @@ import numpy as np
 #import plotly.plotly as py
 
 
-with open("kmeans-400.txt", 'r') as f:
+with open("../data/kmeans-400.txt", 'r') as f:
   content = f.readlines()
 f.close()
 
@@ -37,7 +37,7 @@ for ac in acc:
   accc.append(ac)
 plt.hist(accc)
 plt.ylabel('Appearance')
-plt.show()
+plt.savefig('../data/kmeans-400.png')
 
 
 

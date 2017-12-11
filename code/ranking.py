@@ -2,7 +2,7 @@ import numpy
 
 if __name__ == '__main__':
 
-    with open("kmeans-400.txt", 'r') as f:
+    with open("../data/kmeans-400.txt", 'r') as f:
       content = f.readlines()
     f.close()
 
@@ -31,7 +31,7 @@ if __name__ == '__main__':
         print(sort_index[len(vals)-i-1],":",vals[sort_index[len(vals)-i-1]])
         #print(tweet[str(sort_index[len(vals)-i-1])])   
 
-    with open("kmeans_result/"+"ranking_result", 'w') as f:
+    with open("../data/"+"sport_ranking_result.txt", 'w') as f:
         for i in range(20):
             f.write(str(i+1)+ ". "+str(vals[sort_index[len(vals)-i-1]]) + ", ")
             text = tweet[str(sort_index[len(vals)-i-1])].split(',')

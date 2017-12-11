@@ -8,13 +8,15 @@ if __name__ == '__main__':
 
     ps = PorterStemmer()
 
-    tweets_data_paths = ["sport","holiday","entertainment","disaster"] 
+    tweets_data_paths = ["sport"\
+    #,"holiday","entertainment","disaster"\
+    ] 
 
     stopset = set(stop_ls)
     stopWords = set(stopwords.words('english'))
     dic = {}
     for path in tweets_data_paths:
-        tweets_file = open('data/'+path+'.txt', 'r',encoding='utf-8', errors='ignore')
+        tweets_file = open('../data/'+path+'.txt', 'r',encoding='utf-8', errors='ignore')
         total_msg = 0
         for line in tweets_file:
             try:
@@ -36,7 +38,7 @@ if __name__ == '__main__':
             
         sort_dic = sorted(dic.items(),key=operator.itemgetter(1))[::-1]
         len_dic = 0
-        with open("data/"+path+"_dictionary", 'w') as f:
+        with open("../data/"+path+"_dictionary.txt", 'w') as f:
             count = 0
             for w in sort_dic:
                 if w[1] <= 100 or w[0] == '' or w[0] == 'rt':
@@ -46,4 +48,4 @@ if __name__ == '__main__':
                 count += 1
                 if count >= 500:
                     break
-        print(len_dic)
+        print("dimension: " + str(len_dic))

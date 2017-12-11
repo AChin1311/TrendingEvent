@@ -4,22 +4,24 @@ import numpy
 
 if __name__ == '__main__':
 
-  tweets_data_paths = ["1103_compress.json","1104_compress.json","1105_compress.json","1107_compress.json"] 
-  # tweets_data_paths = [ "1103_compress.json","1104_compress.json","1105_compress.json",\
-  # "1106_compress.json","1107_compress.json","1108_compress.json","1109_compress.json",\
-  # "1110_compress.json","1112_compress.json","1113_compress.json","1114_compress.json",\
-  # "1115_compress.json","1116_compress.json","1117_compress.json","1118_compress.json",\
-  # "1119_compress.json","1120_compress.json","1121_compress.json","1127_compress.json",\
-  # "1128_compress.json"]
+  #tweets_data_paths = ["1103_compress.json","1104_compress.json","1105_compress.json","1107_compress.json"] 
+  tweets_data_paths = [ "1103_compress.json","1104_compress.json","1105_compress.json",\
+  "1106_compress.json","1107_compress.json","1108_compress.json","1109_compress.json",\
+  "1110_compress.json","1112_compress.json","1113_compress.json","1114_compress.json",\
+  "1115_compress.json","1116_compress.json","1117_compress.json","1118_compress.json",\
+  "1119_compress.json","1120_compress.json","1121_compress.json","1127_compress.json",\
+  "1128_compress.json"]
 
   out_files = []
-  li_type = ['disaster','entertainment','holiday','sport']
+  li_type = ['sport',\
+  #'disaster','entertainment','holiday'\
+  ]
   for ty in li_type:
-    out_files.append(open('data/'+ty+'.txt', 'w'))
+    out_files.append(open('../data/'+ty+'.txt', 'w'))
 
   for path in tweets_data_paths:
     print("processing ", path)
-    tweets_file = open('data/'+path, 'r',encoding='utf-8', errors='ignore')
+    tweets_file = open('../data/'+path, 'r',encoding='utf-8', errors='ignore')
     for line in tweets_file:
       try:
         tweet = json.loads(line)

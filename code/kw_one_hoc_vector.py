@@ -22,7 +22,7 @@ for path in tweets_data_paths:
   holiday_features = []
   holiday_freq = []
   print("processing ", path," dictionary")
-  dictionary_file = open('data/'+path+'_dictionary', 'r',encoding='utf-8', errors='ignore')
+  dictionary_file = open('../data/'+path+'_dictionary.txt', 'r',encoding='utf-8', errors='ignore')
   i = 0
   for line in dictionary_file:
     try:
@@ -36,7 +36,7 @@ for path in tweets_data_paths:
 
   m = 0
   print("building ", path," vector")
-  tweets_file = open('data/'+path+'.txt', 'r',encoding='utf-8', errors='ignore')
+  tweets_file = open('../data/'+path+'.txt', 'r',encoding='utf-8', errors='ignore')
   for line in tweets_file:
     try:
       line_list = line.split(',')    
@@ -60,7 +60,7 @@ for path in tweets_data_paths:
   n = 0
   y_list = [0]*n_clus
   print("writing ", path, " result to file")
-  with open("kmeans_result/"+path+"_result", 'w') as f:
+  with open("../data/"+path+"_result.txt", 'w') as f:
     for i,y in enumerate(y_kmeans):
       n += 1
       f.write(str(y))

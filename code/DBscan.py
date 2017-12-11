@@ -24,7 +24,7 @@ for path in tweets_data_paths:
   holiday_features = []
   holiday_freq = []
   print("processing ", path," dictionary")
-  dictionary_file = open('data/'+path+'_dictionary', 'r',encoding='utf-8', errors='ignore')
+  dictionary_file = open('../data/'+path+'_dictionary.txt', 'r',encoding='utf-8', errors='ignore')
   i = 0
   for line in dictionary_file:
     try:
@@ -38,7 +38,7 @@ for path in tweets_data_paths:
 
   m = 0
   print("building ", path," vector")
-  tweets_file = open('data/'+path+'.txt', 'r',encoding='utf-8', errors='ignore')
+  tweets_file = open('../data/'+path+'.txt', 'r',encoding='utf-8', errors='ignore')
   for line in tweets_file:
     try:
       line_list = line.split(',')    
@@ -56,12 +56,12 @@ for path in tweets_data_paths:
 
   db = DBSCAN(eps=100, min_samples=10).fit(X)
   labels = db.labels_
-  with open("kmeans_result/dbscan_"+path+"_result", 'w') as f:
+  with open("../data/dbscan_"+path+"_result.txt", 'w') as f:
     for i in range(len(labels)):
       f.write(str(labels[i]) + ", ")
       f.write(tweets_data[i])
 
-  db_data = open("kmeans_result/dbscan_"+path+"_result", 'r',encoding='utf-8', errors='ignore')
+  db_data = open("../data/dbscan_"+path+"_result.txt", 'r',encoding='utf-8', errors='ignore')
   db_dict = {}
   for line in db_data:
     try:
@@ -79,7 +79,7 @@ for path in tweets_data_paths:
 
   db_dict_index = sorted(db_dict, key=lambda x: len(db_dict[x]), reverse=True) 
 
-  with open("kmeans_result/dbscan_"+path+"_ranking_result", 'w') as f:
+  with open("../data/dbscan_"+path+"_ranking_result.txt", 'w') as f:
     for i in range(len(db_dict_index)):
       index = db_dict_index[i]
       f.write(str(index) + ", ")
